@@ -45,3 +45,8 @@ supply-chain-demand-planner/
 ## License
 
 MIT License — free to use, modify, and distribute.
+
+## 🚀 New Features (2026-03-02)
+- Add demand sensing ML integration and S&OP templates
+- Enhanced error handling and edge case coverage
+- Comprehensive unit tests and integration examples
