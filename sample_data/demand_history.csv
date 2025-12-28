@@ -1,0 +1,19 @@
+sku_id,sku_name,period,demand_qty,unit_cost_usd,supplier,lead_time_weeks
+SKU-SEED-01,Acacia Seeds (kg),2025-01,450,2.50,PT Benih Nusantara,4
+SKU-SEED-01,Acacia Seeds (kg),2025-02,480,2.50,PT Benih Nusantara,4
+SKU-SEED-01,Acacia Seeds (kg),2025-03,510,2.55,PT Benih Nusantara,4
+SKU-SEED-01,Acacia Seeds (kg),2025-04,495,2.55,PT Benih Nusantara,4
+SKU-SEED-01,Acacia Seeds (kg),2025-05,540,2.60,PT Benih Nusantara,4
+SKU-SEED-01,Acacia Seeds (kg),2025-06,520,2.60,PT Benih Nusantara,4
+SKU-FERT-02,Organic Fertilizer (ton),2025-01,12,85.00,Agri Supply Co,6
+SKU-FERT-02,Organic Fertilizer (ton),2025-02,14,85.00,Agri Supply Co,6
+SKU-FERT-02,Organic Fertilizer (ton),2025-03,11,87.00,Agri Supply Co,6
+SKU-FERT-02,Organic Fertilizer (ton),2025-04,15,87.00,Agri Supply Co,6
+SKU-FERT-02,Organic Fertilizer (ton),2025-05,13,88.00,Agri Supply Co,6
+SKU-FERT-02,Organic Fertilizer (ton),2025-06,16,88.00,Agri Supply Co,6
+SKU-TOOL-03,Planting Tools (set),2025-01,25,12.00,Hardware Direct,2
+SKU-TOOL-03,Planting Tools (set),2025-02,28,12.00,Hardware Direct,2
+SKU-TOOL-03,Planting Tools (set),2025-03,22,12.50,Hardware Direct,2
+SKU-TOOL-03,Planting Tools (set),2025-04,30,12.50,Hardware Direct,2
+SKU-TOOL-03,Planting Tools (set),2025-05,27,13.00,Hardware Direct,2
+SKU-TOOL-03,Planting Tools (set),2025-06,32,13.00,Hardware Direct,2
