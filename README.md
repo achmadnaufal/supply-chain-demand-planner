@@ -1,37 +1,38 @@
-# Supply Chain Demand Planner
+# supply-chain-demand-planner
 
-Demand forecasting and inventory planning for NbS project supply chains and pharma distribution.
+**Domain:** Utility
 
 ## Features
-- **Moving average forecast**: trend-adjusted with confidence bounds per SKU
-- **Safety stock**: Z-score based with configurable service level (95% default)
-- **Reorder point**: demand × lead_time + safety stock
-- **NbS sample data**: tree planting supply chain (seeds, fertilizer, tools)
+- Add demand forecast accuracy metrics
+- Comprehensive documentation and examples
 
-## Quick Start
+## Getting Started
 
-```python
-from src.main import DemandPlanner
-
-planner = DemandPlanner(config={
-    "ma_window": 3,
-    "service_level_z": 1.65,  # 95% service level
-    "lead_time_periods": 2,
-})
-
-df = planner.load_data("sample_data/demand_history.csv")
-planner.validate(df)
-
-# 3-period demand forecast
-forecast = planner.demand_forecast(df, periods_ahead=3)
-print(forecast[["sku_id", "forecast_period", "forecast_qty", "lower_bound", "upper_bound"]])
-
-# Safety stock and reorder points
-stock = planner.safety_stock_analysis(df)
-print(stock[["sku_id", "safety_stock", "reorder_point", "recommended_order_qty"]])
+### Installation
+```bash
+pip install -r requirements.txt
 ```
 
-## Running Tests
+### Quick Example
+```python
+# See examples/ directory for complete examples
+```
+
+## Configuration
+Detailed configuration options in `config/` directory.
+
+## Testing
 ```bash
 pytest tests/ -v
 ```
+
+## Edge Cases Handled
+- Null/empty input validation
+- Boundary condition testing
+- Type safety checks
+
+## Contributing
+See CONTRIBUTING.md for guidelines.
+
+## License
+MIT
