@@ -217,3 +217,104 @@ class DemandPlanner:
             else:
                 rows.append({"metric": k, "value": v})
         return pd.DataFrame(rows)
+
+    def calculate_stockout_risk(
+        self,
+        df: pd.DataFrame,
+        sku_col: str = "sku",
+        demand_col: str = "demand_qty",
+        stock_col: str = "current_stock",
+        lead_time_col: Optional[str] = None,
+    ) -> pd.DataFrame:
+        """
+        Assess stockout risk for each SKU based on current inventory vs demand.
+
+        Calculates days-of-supply, risk score, and recommended action for each
+        SKU given current stock and historical demand patterns.
+
+        Args:
+            df: DataFrame with SKU demand and stock data
+            sku_col: Column name for SKU identifier
+            demand_col: Column name for demand quantity per period
+            stock_col: Column name for current stock on hand
+            lead_time_col: Optional column for per-SKU lead time (days).
+                           Falls back to self.lead_time if None.
+
+        Returns:
+            DataFrame with sku, current_stock, avg_daily_demand,
+            days_of_supply, stockout_risk_score (0-100), risk_band, and action
+
+        Raises:
+            ValueError: If required columns are missing or DataFrame is empty
+
+        Example:
+            >>> planner = SupplyChainDemandPlanner(lead_time=14)
+            >>> df = pd.DataFrame({
+            ...     "sku": ["SKU-A", "SKU-A", "SKU-B"],
+            ...     "demand_qty": [100, 110, 200],
+            ...     "current_stock": [500, 500, 150],
+            ... })
+            >>> risks = planner.calculate_stockout_risk(df)
+            >>> print(risks[["sku", "days_of_supply", "risk_band"]])
+        """
+        if df.empty:
+            raise ValueError("DataFrame cannot be empty")
+
+        missing = [c for c in (sku_col, demand_col, stock_col) if c not in df.columns]
+        if missing:
+            raise ValueError(f"Missing required columns: {missing}")
+
+        df = df.copy()
+        df[demand_col] = pd.to_numeric(df[demand_col], errors="coerce").fillna(0)
+        df[stock_col] = pd.to_numeric(df[stock_col], errors="coerce").fillna(0)
+
+        results = []
+        for sku, grp in df.groupby(sku_col):
+            avg_demand = float(grp[demand_col].mean())
+            std_demand = float(grp[demand_col].std(ddof=1)) if len(grp) > 1 else 0.0
+            current_stock = float(grp[stock_col].iloc[0])
+
+            lead_time = (
+                float(grp[lead_time_col].iloc[0])
+                if lead_time_col and lead_time_col in grp.columns
+                else float(self.lead_time)
+            )
+
+            days_of_supply = current_stock / avg_demand if avg_demand > 0 else float("inf")
+            safety_stock = self.z_score * std_demand * (lead_time ** 0.5)
+            reorder_point = avg_demand * lead_time + safety_stock
+
+            # Risk score: 0 (no risk) to 100 (stockout imminent)
+            if days_of_supply == float("inf") or avg_demand == 0:
+                risk_score = 0.0
+            else:
+                cov = std_demand / avg_demand if avg_demand > 0 else 0
+                base_risk = max(0, (lead_time - days_of_supply) / lead_time * 60)
+                variability_risk = min(30, cov * 60)
+                safety_buffer = 10 if current_stock < reorder_point else 0
+                risk_score = min(100.0, base_risk + variability_risk + safety_buffer)
+
+            # Risk band
+            if risk_score >= 70:
+                band, action = "Critical", "Expedite order immediately"
+            elif risk_score >= 40:
+                band, action = "High", "Place order within 48h"
+            elif risk_score >= 20:
+                band, action = "Moderate", "Review demand forecast"
+            else:
+                band, action = "Low", "Monitor per standard schedule"
+
+            results.append({
+                sku_col: sku,
+                "current_stock": current_stock,
+                "avg_demand_per_period": round(avg_demand, 2),
+                "std_demand": round(std_demand, 2),
+                "days_of_supply": round(days_of_supply, 1) if days_of_supply != float("inf") else None,
+                "reorder_point": round(reorder_point, 1),
+                "below_reorder_point": current_stock < reorder_point,
+                "stockout_risk_score": round(risk_score, 1),
+                "risk_band": band,
+                "recommended_action": action,
+            })
+
+        return pd.DataFrame(results).sort_values("stockout_risk_score", ascending=False).reset_index(drop=True)
