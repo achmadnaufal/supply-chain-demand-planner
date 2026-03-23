@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.0] - 2026-03-23
+
+### Added
+- `src/demand_forecaster.py` — Statistical demand forecasting for pharma SKUs
+  - `SimpleMovingAverage` — rolling window baseline forecaster
+  - `ExponentialSmoothing` — Holt's double exponential smoother with trend
+  - `SafetyStockCalculator` — z-score-based safety stock and reorder point
+  - MAE / MAPE error metrics for model validation
+  - Non-negative forecast constraint for declining trends
+- `data/sample_demand_history.csv` — 24 months of demand for 4 oncology/diabetes SKUs
+- 30 unit tests in `tests/test_demand_forecaster.py`
+
 ## [1.3.0] - 2026-03-15
 
 ### Added
