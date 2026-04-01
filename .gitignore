@@ -1,8 +1,13 @@
-data/*.csv
-data/*.xlsx
 __pycache__/
-*.pyc
-.env
+*.py[cod]
 *.egg-info/
 dist/
 build/
+.eggs/
+*.log
+.env
+.venv/
+venv/
+*.DS_Store
+output/
+*.db

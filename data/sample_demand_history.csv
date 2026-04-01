@@ -1,0 +1,25 @@
+sku,product_name,month,demand_units,price_usd,channel,country
+OSIMER-80MG-30PK,Osimertinib 80mg x30,2025-01,245,4200,Hospital,Indonesia
+OSIMER-80MG-30PK,Osimertinib 80mg x30,2025-02,258,4200,Hospital,Indonesia
+OSIMER-80MG-30PK,Osimertinib 80mg x30,2025-03,271,4200,Hospital,Indonesia
+OSIMER-80MG-30PK,Osimertinib 80mg x30,2025-04,265,4200,Hospital,Indonesia
+OSIMER-80MG-30PK,Osimertinib 80mg x30,2025-05,280,4200,Hospital,Indonesia
+OSIMER-80MG-30PK,Osimertinib 80mg x30,2025-06,295,4200,Hospital,Indonesia
+GEFITI-250MG-30PK,Gefitinib 250mg x30,2025-01,420,850,Hospital,Thailand
+GEFITI-250MG-30PK,Gefitinib 250mg x30,2025-02,435,850,Hospital,Thailand
+GEFITI-250MG-30PK,Gefitinib 250mg x30,2025-03,448,850,Hospital,Thailand
+GEFITI-250MG-30PK,Gefitinib 250mg x30,2025-04,460,850,Hospital,Thailand
+GEFITI-250MG-30PK,Gefitinib 250mg x30,2025-05,472,850,Hospital,Thailand
+GEFITI-250MG-30PK,Gefitinib 250mg x30,2025-06,485,850,Hospital,Thailand
+PEMB-100MG-VIAL,Pembrolizumab 100mg vial,2025-01,85,7500,Hospital,Vietnam
+PEMB-100MG-VIAL,Pembrolizumab 100mg vial,2025-02,92,7500,Hospital,Vietnam
+PEMB-100MG-VIAL,Pembrolizumab 100mg vial,2025-03,98,7500,Hospital,Vietnam
+PEMB-100MG-VIAL,Pembrolizumab 100mg vial,2025-04,105,7500,Hospital,Vietnam
+PEMB-100MG-VIAL,Pembrolizumab 100mg vial,2025-05,112,7500,Hospital,Vietnam
+PEMB-100MG-VIAL,Pembrolizumab 100mg vial,2025-06,118,7500,Hospital,Vietnam
+METF-500MG-100PK,Metformin 500mg x100,2025-01,1820,12,Retail,Indonesia
+METF-500MG-100PK,Metformin 500mg x100,2025-02,1850,12,Retail,Indonesia
+METF-500MG-100PK,Metformin 500mg x100,2025-03,1890,12,Retail,Indonesia
+METF-500MG-100PK,Metformin 500mg x100,2025-04,1865,12,Retail,Indonesia
+METF-500MG-100PK,Metformin 500mg x100,2025-05,1910,12,Retail,Indonesia
+METF-500MG-100PK,Metformin 500mg x100,2025-06,1935,12,Retail,Indonesia
